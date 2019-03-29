@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../js/jquery.js"></script>
+</head>
+<body>
+    <h1>登陆</h1>
+    <br><br>
+    username: <input type="text" id="name"><br><br>
+    password: <input type="text" id="password"><br><br>
+    <button id="confirm" >登陆</button>
+</body>
+    <script type="text/javascript">
+       $('#confirm').click(function () {
+           var param={
+               name : $('#name').val(),
+               password : $('#password').val()
+           };
+
+           $.ajax({
+               type:"post",
+               url:"/login.do",
+               data:param,
+               dataType:"json",
+               success:function (data) {
+                   if(data.result=="false"){
+                       alert(data.errorMsg);
+                   }
+                   else {
+                       console.info(data);
+                       window.location.href="/loginSuccess";
+                   }
+
+
+
+               }
+
+
+           })
+
+
+
+
+       });
+
+
+    </script>
+</html>

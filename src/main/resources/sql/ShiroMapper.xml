@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <!-- namespace指定和哪个Mapper映射器接口对应 -->
+<mapper namespace="com.xdl.mapper.ShiroMapper">
+	<!-- 定义SQL语句 -->
+    <select id="findAllUser" resultType="com.xdl.bean.User">
+        select * from User
+
+    </select>
+
+    <select id="findByName" resultType="com.xdl.bean.User">
+        select * from User where name=#{name}
+    </select>
+
+    <select id="findRoles" resultType="String">
+        select r.name from role r
+          join user_role ur on r.id=ur.rid
+          join user u on u.id=ur.uid
+          where u.name=#{name}
+    </select>
+
+    <select id="findPermission" resultType="String">
+        select r.name,u.name,p.name from role r
+        join user_role ur on r.id=ur.rid
+         join user u on u.id=ur.uid
+          join role_permission rp on r.id=rp.rid
+          join permission p on p.id=rp.pid
+          where u.name=#{name}
+    </select>
+
+
+
+
+
+
+
+    <!--<select id="findById" parameterType="int"
+      resultType="com.xdl.bean.Dept">
+         select * from dept where deptno = #{no}
+    </select>
+    <select id="findAll"  resultType="com.xdl.bean.Dept">
+         select * from Dept
+    </select>
+
+    <select id="findByDName" parameterType="java.lang.String" resultType="com.xdl.bean.Dept">
+        select * from dept where dname=#{dname}
+    </select>-->
+
+
+  
+</mapper>
